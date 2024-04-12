@@ -1,5 +1,3 @@
-.side-nav{
-  width: 250px;
-  border: 2px solid black;
-  height: 900px;
+.col{
+  border-right: 2px solid rgba(227, 221, 221, 0.414);
 }
