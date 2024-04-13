@@ -2,13 +2,19 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const NavBar=()=>{
+  const [selectedOption, setSelectedOption] = useState('User');
   const navigate = useNavigate()
   const user = JSON.parse(localStorage.getItem('userdetails'));
   console.log(user,"user");
+
+  const handleOptionChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
+  
   const handleLogout = () => {
     // Implement your logout logic here, e.g., clear localStorage, reset state, etc.
     localStorage.removeItem("userdetails");
-    navigate('/login');
+    navigate('/');
 };
     return(
         <nav>
@@ -58,7 +64,24 @@ const NavBar=()=>{
           </ul>
           
         </div>
-
+        <div>
+      <select
+       
+        defaultValue={user. EmailId}
+        onChange={handleOptionChange}
+        className="bg-blue-500 text-white font-semibold py-2 px-4 rounded inline-flex items-center"
+      >
+        <option value="User">{user.EmailId}</option>
+        <option ><button
+          className="bg-blue-500 text-white font-semibold py-2 px-4 rounded inline-flex items-center ml-2"
+          onClick={handleLogout}
+        >
+          Logout
+        </button></option>
+        
+      </select>
+      
+    </div>
         
         
       </nav>
