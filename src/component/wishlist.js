@@ -15,13 +15,16 @@ const Wishlist = () => {
       <div className="row">
         <div className="col-12">
           <div className="card card-body">
-            <h6>wishlist</h6>
+            <h6 className=" h3 fw-bold">Welcome to <span className="text-danger">Watchlists</span></h6>
             <p></p>
           </div>
         </div>
         {wishlist.movies.map((item, idx) => (
           <div key={idx} className="col-xl-3 col-lg-4 col-md-6 col-sm-6">
-            <div className="card">
+            <div className="card position-relative shadow-sm border-0 " style={{width:250}}>
+            <div class="position-absolute top-0 start-0">
+                    <button className="btn card bg-dark text-white p-1" onClick={(e) => handleRemove(item.imdbID)}><i class="bi bi-dash"/></button>
+                  </div>
               <img
                 className="card-img-top"
                 src={item.Poster}

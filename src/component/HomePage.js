@@ -29,7 +29,6 @@ function MovieListComp() {
       .then((response) => {
         SetMovieList(response.data);
       });
-    console.log(movieList?.Response, "console.log(response.data.Response);");
   };
   return (
     <>
@@ -67,7 +66,7 @@ function MovieListComp() {
               >
                   <div className="card position-relative shadow-sm border-0 " style={{width:250}}>
                   <div class="position-absolute top-0 start-0">
-                    <button className="btn btn-warning p-1">@</button>
+                    <button className="btn card bg-dark text-white p-1" onClick={(e) => handleFavourite(item.imdbID)}><i class="bi bi-plus"/></button>
                   </div>
                     <img
                       className="card-img-top img-fluid"
