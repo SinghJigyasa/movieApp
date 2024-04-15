@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState ={
-    movie:[]
+  movies:[]
 }
 
 const dataSlice = createSlice({
@@ -9,9 +9,20 @@ const dataSlice = createSlice({
     initialState,
     reducers: {
     addMovieToFavorites: (state, action) => {
+      console.log(action.payload)
       state.movies.push(action.payload);
     },
+  //   removeMovieFromFavorites:(state,action)=>{
+  //     const {id} = action.payload;
+  //     const idFind = state.find(user=>user.id == id);
+  //     if(idFind){
+  //         return state.filter(f=>f.id !== id)
+  //     }
+  // },
+  removeMovieFromFavorites: (state, action) => {
+    state.movies = state.movies.filter(item => item.imdbID !== action.payload);
+  },
 }
 })
-export const { addMovieToFavorites } = dataSlice.actions;
+export const { addMovieToFavorites, removeMovieFromFavorites } = dataSlice.actions;
 export default dataSlice.reducer;

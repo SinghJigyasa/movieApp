@@ -1,20 +1,21 @@
 import "./App.css";
 import "../node_modules/bootstrap/dist/css/bootstrap.css";
-import NavBar from "./component/navbar";
 import MovieListComp from "./component/HomePage";
+import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
+import Login from "./component/login";
+import Wishlist from "./component/wishlist";
+import { Layout } from "./layouts/Layout";
 function App() {
   return (
-    <div className="container-fluid">
-      <div className="row">
-        <div className="col-auto min-vh-100 col" >
-          <NavBar/>
-        </div>
-        <div className="col">
-          <MovieListComp/>
-        </div>
-      </div>
-     
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="" element={<Layout />}>
+          <Route path="/home" element={<MovieListComp />} />
+          <Route path="/watchlist" element={<Wishlist />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
