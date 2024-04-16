@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Modal, Table } from "react-bootstrap";
 
 export const ViewDetailsModal = ({ show, onHide }) => {
   const [movieDetail, setMovieDetail] = useState([]);
@@ -8,49 +8,64 @@ export const ViewDetailsModal = ({ show, onHide }) => {
   useEffect(() => {
     getMoviesDetails();
   }, [show.emdId]);
-  
+
   const getMoviesDetails = () => {
     axios
       .get(`http://www.omdbapi.com/?i=${show.emdId}&apikey=aab08961`)
       .then((response) => {
         setMovieDetail(response.data);
       })
-      .catch((err)=>{
-        console.log(err)
-      })
-  }
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <Modal show={show.show} onHide={onHide}>
       <Modal.Header closeButton>
-        <Modal.Title className="fw-bold text-danger text-center">Movie Details</Modal.Title>
+        <Modal.Title className="fw-bold text-danger text-center">
+          Movie Details
+        </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <div class="row gy-4">
-          <div class="col-12 text-center">
-            <img
-              height={100}
-              src={movieDetail.Poster}
-              className="img-fluid rounded mx-auto"
-              alt={movieDetail.Poster}
-            />
-          </div>
-          <div className="col-12">
-            <div className="">
-              <h5 className=" h4 fw-bold ">
+          <div class="col-12">
+            <div className="img_area text-center">
+              <img
+                height={100}
+                src={movieDetail.Poster}
+                className="img-fluid rounded mx-auto"
+                alt={movieDetail.Poster}
+              />
+            </div>
+            <div className="content mt-4">
+              <h5 className="mb-4 fw-bold ">
                 {movieDetail.Title}({movieDetail.Year})
               </h5>
-              <p className="fs-6"><span className="fw-medium">Genre: </span> {movieDetail.Genre}</p>
-              <p className="card-text"><span className="fw-medium">Cast: </span> {movieDetail.Actors}</p>
-              <p><span className="fw-medium">Release Date: </span>{movieDetail.Released}</p>
-              <p>
-                <span className="fw-medium">Writer & Director:</span>{" "}
-                {`${movieDetail.Writer},${movieDetail.Director}`}
-              </p>
-              <p>
-                <span className="fw-medium text-wrap">Plot: </span>
-                {movieDetail.Plot}
-              </p>
+              <Table striped borderless size="sm">
+                <tbody>
+                  <tr>
+                    <td className="fw-bold">Genre:</td>
+                    <td>{movieDetail.Genre}</td>
+                  </tr>
+                  <tr>
+                    <td className="fw-bold">Cast:</td>
+                    <td>{movieDetail.Actors}</td>
+                  </tr>
+                  <tr>
+                    <td className="fw-bold">Release Date:</td>
+                    <td>{movieDetail.Released}</td>
+                  </tr>
+                  <tr>
+                    <td className="fw-bold">Writer & Director:</td>
+                    <td>{movieDetail.Director}</td>
+                  </tr>
+                  <tr>
+                    <td className="fw-bold">Plot:</td>
+                    <td>{movieDetail.Plot}</td>
+                  </tr>
+                </tbody>
+              </Table>
             </div>
           </div>
         </div>

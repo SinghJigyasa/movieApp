@@ -10,9 +10,9 @@ import { ViewDetailsModal } from "./ViewDetailsModal";
 function MovieListComp() {
   const [movieList, SetMovieList] = useState([]);
   const [searchKey, setSearchKey] = useState("Tom");
-  const [modalShow, setModalShow] = useState({show:false,emdId:''});
+  const [modalShow, setModalShow] = useState({ show: false, emdId: "" });
   const dispatch = useDispatch();
-  
+
   const handleChange = (e) => {
     setSearchKey(e.target.value);
   };
@@ -95,17 +95,17 @@ function MovieListComp() {
                   <Button
                     className="btn btn-primary"
                     onClick={() => {
-                      setModalShow((pre)=>({...pre, show:true, emdId:item.imdbID}));
+                      setModalShow((pre) => ({
+                        ...pre,
+                        show: true,
+                        emdId: item.imdbID,
+                      }));
                     }}
                   >
                     View
                   </Button>
                 </div>
               </div>
-              <ViewDetailsModal
-                show={modalShow}
-                onHide={() => setModalShow(false)}
-              />
             </div>
           ))
         ) : (
@@ -120,6 +120,7 @@ function MovieListComp() {
           </div>
         )}
       </div>
+      <ViewDetailsModal show={modalShow} onHide={() => setModalShow(false)} />
     </>
   );
 }
