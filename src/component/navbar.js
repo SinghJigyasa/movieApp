@@ -2,13 +2,9 @@ import { Dropdown, Nav, Offcanvas } from "react-bootstrap";
 import { NavLink, useNavigate } from "react-router-dom";
 
 const NavBar = ({ offCanvasShow, offCanvasHide }) => {
+
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("userdetails"));
-  console.log(user, "user");
-
-  // const handleOptionChange = (event) => {
-  //   setSelectedOption(event.target.value);
-  // };
 
   const handleLogout = () => {
     localStorage.removeItem("userdetails");
@@ -27,6 +23,7 @@ const NavBar = ({ offCanvasShow, offCanvasHide }) => {
       icon:"heart"
     },
   ];
+  
   return (
     <Offcanvas show={offCanvasShow} onHide={offCanvasHide} responsive="lg">
       <Offcanvas.Header closeButton>
@@ -38,12 +35,12 @@ const NavBar = ({ offCanvasShow, offCanvasHide }) => {
         <div className="text-white py-3 pe-3 w-100 ">
           <Nav variant="pills" className="top_navbar flex-column gap-2">
             {navList.map((nav, idx) => (
-              <Nav.Item key={idx}>
+              <Nav.Item key={idx} className="border-1  rounded-1 ">
                 <Nav.Link
                   as={NavLink}
                   to= {nav.path}
                   className={({ isActive }) =>
-                    isActive ? "bg-danger text-white" : ""
+                    isActive ? "bg-danger text-white" : "" 
                   }
                   onClick={offCanvasHide}
                 >
@@ -56,12 +53,12 @@ const NavBar = ({ offCanvasShow, offCanvasHide }) => {
           <div className="position-absolute bottom-0 start-0  end-0 mt-auto">
             <div className="d-grid profile">
               <Dropdown align="end" className="pe-3">
-                <Dropdown.Toggle variant="success" id="dropdown-basic">
+                <Dropdown.Toggle  variant="light" className="border-4 m-4 text-center w-75 " size="sm" id="dropdown-basic">
                   {user}
                 </Dropdown.Toggle>
 
-                <Dropdown.Menu className="border-0 shadow-sm p-2">
-                  <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
+                <Dropdown.Menu className="border-1 shadow-sm p-2">
+                  <Dropdown.Item onClick={handleLogout} className="fw-medium">Logout</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             </div>

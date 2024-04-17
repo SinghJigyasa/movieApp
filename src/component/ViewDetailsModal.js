@@ -24,6 +24,7 @@ export const ViewDetailsModal = ({ show, onHide }) => {
     <Modal show={show.show} onHide={onHide}>
       <Modal.Header closeButton>
         <Modal.Title className="fw-bold text-danger text-center">
+        <i className="bi bi-film me-2"></i>
           Movie Details
         </Modal.Title>
       </Modal.Header>
@@ -53,8 +54,8 @@ export const ViewDetailsModal = ({ show, onHide }) => {
                     <td>{movieDetail.Actors}</td>
                   </tr>
                   <tr>
-                    <td className="fw-bold">Release Date:</td>
-                    <td>{movieDetail.Released}</td>
+                    <td className="fw-bold">Duration:</td>
+                    <td>{movieDetail.Runtime}</td>
                   </tr>
                   <tr>
                     <td className="fw-bold">Writer & Director:</td>

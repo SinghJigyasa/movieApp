@@ -2,24 +2,28 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { removeMovieFromFavorites } from "../Redux/slice";
 import { Link } from "react-router-dom";
+import { ViewDetailsModal } from "./ViewDetailsModal";
+import { useState } from "react";
+import { Button } from "react-bootstrap";
 
 const Wishlist = () => {
   const wishlist = useSelector((state) => state.store);
   const dispatch = useDispatch();
-  console.log(wishlist, "wishlist");
+  const [modalShow, setModalShow] = useState({ show: false, emdId: "" });
+
   const handleRemove = (id) => {
-    console.log(id, "imdbID");
     dispatch(removeMovieFromFavorites(id));
   };
+
   return (
-    <div className="movie-Style py-3">
+    <div className="movie-Style py-4 ps-4">
       <div className="row">
         <div className="col-12">
           <div className="card card-body">
             <h6 className=" h3 fw-bold">
               Welcome to <span className="text-danger">Watchlists</span>
             </h6>
-            <p></p>
+            <p>Browse movies, add them to watchlists and share them with friends.</p>
           </div>
         </div>
         {wishlist.movies.length?wishlist.movies.map((item, idx) => (
@@ -45,12 +49,18 @@ const Wishlist = () => {
               />
               <div className="card-body">
                 <h6 className="card-title">{item.Title}</h6>
-                <button
-                  className="btn btn-primary"
-                  onClick={(e) => handleRemove(item.imdbID)}
-                >
-                  Remove from Watchlist
-                </button>
+                <Button
+                    className="btn btn-primary"
+                    onClick={() => {
+                      setModalShow((pre) => ({
+                        ...pre,
+                        show: true,
+                        emdId: item.imdbID,
+                      }));
+                    }}
+                  >
+                    View
+                  </Button>
               </div>
             </div>
           </div>
@@ -67,6 +77,8 @@ const Wishlist = () => {
         )
         }
       </div>
+      <ViewDetailsModal show={modalShow} onHide={() => setModalShow(false)} />
+
     </div>
   );
 };

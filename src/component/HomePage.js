@@ -92,6 +92,7 @@ function MovieListComp() {
                 <div className="card-body">
                   <h6 className="card-title text-truncate">{item.Title}</h6>
                   <p>({item.Year})</p>
+                  <p><span className='fw-medium'>Type:</span> {item.Type}</p>
                   <Button
                     className="btn btn-primary"
                     onClick={() => {
